@@ -28,7 +28,7 @@ public class Blog {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToMany(targetEntity = Post.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blog")
     private List<Post> posts;
 
     public Long getId() {
@@ -86,6 +86,8 @@ public class Blog {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
+
 
     @Override
     public String toString() {

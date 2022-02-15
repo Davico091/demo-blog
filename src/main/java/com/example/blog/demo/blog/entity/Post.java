@@ -17,13 +17,17 @@ public class Post {
     private String title;
 
     @Column
-    private Date date;
+    private String date;
 
     @Column
     private String status;
 
     @Column
     private String content;
+
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "blog_id")
+    private Blog blog;
 
     @OneToMany(targetEntity = Comment.class)
     private List<Comment> comments;
@@ -44,11 +48,11 @@ public class Post {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -74,6 +78,14 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 
     @Override
